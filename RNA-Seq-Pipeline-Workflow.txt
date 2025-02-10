@@ -1,0 +1,29 @@
+|----------------------------------------------------------------------------NGS-ANALYSIS-PIPELINE-FOR-RNA-SEQ-DATA-----------------------------------------------------------------------------|
+|																								|	
+|										PROPOSED WORKFLOW OF THIS PIPELINE										|
+|                                                                                                                                                                                               |
+|	Tools required for the process                                                                                                                                                          |	
+|    	 _______________________________________________________________________________________________________________________								|
+|	|	TOOL	|		Pupose					|	Installation Command		   	|								|
+|	|_______________|_______________________________________________________|_______________________________________________|								|
+|	| 1. Conda	| Management of Environment and Dependencies 		| Already installed in the base			|								|
+|	| 2. FastQC	| Quality check of raw and trimmed reads		| conda install -c bioconda fastqc		|								|
+|	| 3. MultiQC	| Aggregation of FastQC reports				| conda install -c bioconda multiqc		|								|
+|	| 4. Trim Galore| Trimming of adapters and low-quality reads		| conda install -c bioconda trim_galore		|								|
+|	| 5. HiSAT2	| Alignment of reads to the reference genome		| conda install -c bioconda hisat2		|								|
+|	| 6. Samtools	| Conversion, sorting and indexing of bam files		| conda install -c bioconda samtools		|								|
+|	|_______________|_______________________________________________________|_______________________________________________|								|
+|																								|
+|	NOTE:																							| 
+|		It is advised that the user sets up separate environment for each of the tool, so that dependencies and packages of one tool will not interfere with those of others		|
+|		Before execution this pipeline, we have the genome already indexed with us. Genome indexing was done using HiSAT2								|
+|																								|
+|	STEPS OF THE PIPELINE																					|
+|		1. Run the quality check on the raw reads using FastQC and MultiQC														|
+|		2. Trimming of quality-checked raw reads using trim galore															|
+|		3. Second round of quality check on trimmed reads																|
+|		4. Alignement of quality-checked trimmed reads against the reference genome using BWA												|
+|		5. Once the alignment has been done, the generated (.sam) files will then be converted to (.bam) files										|
+|		6. These (.bam) files will then be sorted and then indexed															|
+|																								|
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
